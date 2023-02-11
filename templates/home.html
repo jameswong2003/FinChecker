@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Home Page</title> 
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <div class="user_name">{{ user.name }}</div>
+    <div class="user_balance">Current Balance: <p>{{ user.current_balance }}</p></div>
+</div>
+
+<form action="/home" method="POST">
+    <label for="trans_name">Transaction Name</label>
+    <br>
+    <input type="text" name="trans_name" id="trans_name" autocomplete="off">
+    <br>
+
+    <label for="amount">Transaction Value</label>
+    <br>
+    <input type="number" step="0.01" name="amount" id="amount" autocomplete="off">
+    <br>
+    
+    <input type="submit" class="button" value="Add Balance">
+</form>
+
+<div class="container">
+    <table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Transaction Name</th>
+                <th>Transaction Value</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for entry in entries %}
+            <tr>
+                <td>{{ entry[0] }}</td>
+                <td>{{ entry[1] }}</td>
+                <td>{{ entry[2] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+{% endblock%}
