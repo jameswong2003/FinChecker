@@ -14,7 +14,7 @@ db = db_controller('')
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
-        user.name = request.form.get('username')
+        user.name = request.form.get('username').lower()
         # Checks if the user database exist. If not then we create a new table, otherwise we just connect to it
         if os.path.exists('database/{user}'.format(user=user.name)):
             db = db_controller(data_path='database/{user}'.format(user=user.name))
