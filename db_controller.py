@@ -41,3 +41,11 @@ class db_controller:
         for row in rows:
             sum += row[2]
         return sum
+    
+    def grab_month(self, month):
+        self.c.execute("SELECT * FROM user WHERE strftime('%m', time_of_entry) = '{month}'".format(month=month))
+        self.conn.commit()
+        return self.c.fetchall()
+    
+db = db_controller('database/james')
+print(db.grab_month('02'))

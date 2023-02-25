@@ -11,6 +11,7 @@ app = Flask(__name__)
 user = Profile('', 0)
 db = db_controller('')
 
+# index Route
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
@@ -36,7 +37,7 @@ def home():
         # Update Database on 'POST'
         transaction_name = request.form.get('trans_name')
         transaction_value = request.form.get('amount')
-        curr_time = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        curr_time = datetime.now().strftime('%Y-%m-%d')
         
 
         db.addEntry(curr_time, transaction_name, transaction_value)
@@ -46,7 +47,10 @@ def home():
         user.current_balance = db.calc_value()
     return render_template('home.html', user=user, entries=entries)
 
-
+# Route to monthly spendings page
+# @app.route('/monthly-spending')
+# def monthly_spending():
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
