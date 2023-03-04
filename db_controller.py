@@ -47,5 +47,3 @@ class db_controller:
         self.conn.commit()
         return self.c.fetchall()
     
-db = db_controller('database/james')
-print(db.grab_month('02'))

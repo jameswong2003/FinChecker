@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Monthly Spendings</title>
+{% endblock %}
+{% block body %}
+
+<form method="POST">
+    <input type="text" name="form_month" id="form_month">
+    <br>
+    <input type="submit">
+</form>
+
+<div class="container">
+    <table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Transaction Name</th>
+                <th>Transaction Value</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for entry in entries %}
+            <tr>
+                <td>{{ entry[0] }}</td>
+                <td>{{ entry[1] }}</td>
+                <td>{{ entry[2] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

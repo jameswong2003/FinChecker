@@ -48,8 +48,13 @@ def home():
     return render_template('home.html', user=user, entries=entries)
 
 # Route to monthly spendings page
-# @app.route('/monthly-spending')
-# def monthly_spending():
+@app.route('/monthly-spending')
+def monthly_spending():
+
+    if request.method == 'POST':
+        form_month = request.form.get('form_month')
+        entries = db.grab_month(month=form_month)
+    return render_template('monthly-spending.html', entries=entries)
     
 
 if __name__ == "__main__":
