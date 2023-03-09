@@ -56,7 +56,8 @@ def monthly_spending():
 
     if request.method == 'POST':
         form_month = request.form.get('form_month')
-        entries = db.grab_month(month=form_month)
+        form_year = request.form.get('form_year')
+        entries = db.grab_month(form_month, form_year)
 
     return render_template('monthly-spending.html', entries=entries)
 

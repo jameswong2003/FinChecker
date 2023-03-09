@@ -44,11 +44,13 @@ class db_controller:
         return sum
     
     # Grab all the entries based on the specific month
-    def grab_month(self, month):
+    def grab_month(self, month, year):
         check_month = month
+
         if int(check_month) < 10:
             check_month = '0' + check_month
-        self.c.execute("SELECT * FROM user WHERE strftime('%m', time_of_entry) = '{month}'".format(month=check_month))
+        self.c.execute("SELECT * FROM user WHERE strftime('%m %Y', time_of_entry) = '{month} {year}'".format(month=check_month, year=year))
         self.conn.commit()
+
         return self.c.fetchall()
-    
+
