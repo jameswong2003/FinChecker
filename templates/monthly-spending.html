@@ -21,13 +21,17 @@
         </thead>
 
         <tbody>
-            {% for entry in entries %}
-            <tr>
-                <td>{{ entry[0] }}</td>
-                <td>{{ entry[1] }}</td>
-                <td>{{ entry[2] }}</td>
-            </tr>
-        {% endfor %}
+            {% if entries|length == 0 %}
+                <div>No Results</div>
+            {% else %}
+                {% for entry in entries %}
+                <tr>
+                    <td>{{ entry[0] }}</td>
+                    <td>{{ entry[1] }}</td>
+                    <td>{{ entry[2] }}</td>
+                </tr>
+                {% endfor %}
+            {% endif %}
         </tbody>
     </table>
 </div>
