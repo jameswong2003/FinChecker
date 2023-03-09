@@ -23,7 +23,7 @@ class db_controller:
         self.conn.commit()
     
     # Fetch all the data based on the username(search_for)
-    def fetch_entries(self):
+    def fetch_all_entries(self):
         self.c.execute("SELECT * FROM user")
         self.conn.commit()
         return self.c.fetchall()
@@ -35,15 +35,20 @@ class db_controller:
         self.conn.commit()
 
     # Calculate Sum of transaction_value
-    def calc_value(self):
-        rows = self.fetch_entries()
+    # entries: formatted entries to calculate based on fetch entries
+    def calc_value(self, entries):
+        rows = entries
         sum = 0
         for row in rows:
             sum += row[2]
         return sum
     
+    # Grab all the entries based on the specific month
     def grab_month(self, month):
-        self.c.execute("SELECT * FROM user WHERE strftime('%m', time_of_entry) = '{month}'".format(month=month))
+        check_month = month
+        if int(check_month) < 10:
+            check_month = '0' + check_month
+        self.c.execute("SELECT * FROM user WHERE strftime('%m', time_of_entry) = '{month}'".format(month=check_month))
         self.conn.commit()
         return self.c.fetchall()
     

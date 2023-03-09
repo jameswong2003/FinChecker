@@ -9,13 +9,14 @@ from db_controller import *
 app = Flask(__name__)
 
 user = Profile('', 0)
-db = db_controller('')
+
 
 # index Route
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
         user.name = request.form.get('username').lower()
+
         # Checks if the user database exist. If not then we create a new table, otherwise we just connect to it
         if os.path.exists('database/{user}'.format(user=user.name)):
             db = db_controller(data_path='database/{user}'.format(user=user.name))
@@ -30,8 +31,8 @@ def index():
 @app.route('/home', methods=['POST', 'GET'])
 def home():
     db = db_controller(data_path='database/{user}'.format(user=user.name))
-    entries = db.fetch_entries()
-    user.current_balance = db.calc_value()
+    entries = db.fetch_all_entries()
+    user.current_balance = db.calc_value(entries)
 
     if request.method == 'POST':
         # Update Database on 'POST'
@@ -41,10 +42,10 @@ def home():
         
 
         db.addEntry(curr_time, transaction_name, transaction_value)
-        entries = db.fetch_entries()
+        entries = db.fetch_all_entries()
 
         # Updates user current balance based on database
-        user.current_balance = db.calc_value()
+        user.current_balance = db.calc_value(entries)
     return render_template('home.html', user=user, entries=entries)
 
 # Route to monthly spendings page
