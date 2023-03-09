@@ -44,7 +44,7 @@ class db_controller:
         return sum
     
     # Grab all the entries based on the specific month
-    def grab_month(self, month, year):
+    def grab_from_time(self, month, year):
         check_month = month
 
         if int(check_month) < 10:
