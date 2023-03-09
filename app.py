@@ -48,14 +48,16 @@ def home():
     return render_template('home.html', user=user, entries=entries)
 
 # Route to monthly spendings page
-@app.route('/monthly-spending')
+@app.route('/monthly-spending', methods=['POST', 'GET'])
 def monthly_spending():
+    db = db_controller(data_path='database/{user}'.format(user=user.name))
+    entries = []
 
     if request.method == 'POST':
         form_month = request.form.get('form_month')
         entries = db.grab_month(month=form_month)
     return render_template('monthly-spending.html', entries=entries)
-    
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=1000, debug=True)
