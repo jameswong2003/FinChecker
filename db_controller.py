@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 
 class db_controller:
     def __init__(self, data_path):
@@ -8,6 +9,7 @@ class db_controller:
     # Initializes db
     def initialize_db(self):
         self.c.execute("""CREATE TABLE user (
+            ID INTEGER PRIMARY KEY AUTOINCREMENT,
             time_of_entry text,
             transaction_name text,
             transaction_value number
@@ -17,7 +19,7 @@ class db_controller:
     
     # Add entry to database
     def addEntry(self, time, transaction, value):
-        self.c.execute("""INSERT INTO user VALUES ('{time}', '{transaction_name}', '{transaction_value}')
+        self.c.execute("""INSERT INTO user (time_of_entry,transaction_name,transaction_value) VALUES ('{time}','{transaction_name}','{transaction_value}')
         """.format(time=time, transaction_name=transaction, transaction_value=value)
         )
         self.conn.commit()
@@ -40,7 +42,7 @@ class db_controller:
         rows = entries
         sum = 0
         for row in rows:
-            sum += row[2]
+            sum += row[3]
         return sum
     
     # Grab all the entries based on the specific month
@@ -53,4 +55,4 @@ class db_controller:
         self.conn.commit()
 
         return self.c.fetchall()
-
+    

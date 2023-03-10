@@ -49,7 +49,7 @@ def home():
     return render_template('home.html', user=user, entries=entries)
 
 # Route to monthly spendings page
-@app.route('/monthly-spending', methods=['POST', 'GET'])
+@app.route('/timeframe_spending', methods=['POST', 'GET'])
 def monthly_spending():
     db = db_controller(data_path='database/{user}'.format(user=user.name))
     entries = []
@@ -59,7 +59,7 @@ def monthly_spending():
         form_year = request.form.get('form_year')
         entries = db.grab_from_time(form_month, form_year)
 
-    return render_template('monthly-spending.html', entries=entries)
+    return render_template('timeframe_spending.html', entries=entries)
 
 
 if __name__ == '__main__':
