@@ -1,13 +1,19 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Index</title>
+<title>Log In</title>
 {% endblock %}
 
 {%block body %}
-<form action="/" method="POST">
-    <div class="login_text">Login</div>
-    <input type="text" name="username" id="username" required="required" placeholder="username" autocomplete="off"><br>
-    <input type="submit" class="button" value="Login">
-</form>
+<div class="login-page">
+    <form action="/" class="login-form" method="POST">
+        <div class="login_text">Log In</div>
+
+        <div class="form-item">
+            <label for="username">Enter Login</label>
+            <input type="text" name="username" id="username" required="required" placeholder="username" autocomplete="off">
+        </div>
+        <input type="submit" class="button" value="Login">
+    </form>
+</div>
 {% endblock %}
