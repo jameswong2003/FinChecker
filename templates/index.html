@@ -5,15 +5,13 @@
 {% endblock %}
 
 {%block body %}
-<div class="login-page">
-    <form action="/" class="login-form" method="POST">
-        <div class="login_text">Log In</div>
+<div class="content">
+    <form action="/" class="content-form" method="POST">
+        <div class="form-title">Log In</div>
 
-        <div class="form-item">
-            <label for="username">Enter Login</label>
+            <label class="form-label" for="username">Enter Login</label>
             <input type="text" name="username" id="username" required="required" placeholder="username" autocomplete="off">
-        </div>
-        <input type="submit" class="button" value="Login">
+        <input type="submit" class="login-button" value="Login">
     </form>
 </div>
 {% endblock %}
